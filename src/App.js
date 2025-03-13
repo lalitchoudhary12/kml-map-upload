@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import KmlUpload from './components/KmlUpload';
+import SummaryButton from './components/SummaryButton';
+import DetailedButton from './components/DetailedButton';
+import MapDisplay from './components/MapDisplay';
 
-function App() {
+const App = () => {
+  const [kmlData, setKmlData] = useState(null);
+
+  console.log(kmlData); // Add this line to check kmlData
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Upload KML File</h1>
+      <KmlUpload setKmlData={setKmlData} />
+      {kmlData && (
+        <>
+          <SummaryButton kmlData={kmlData} />
+          <DetailedButton kmlData={kmlData} />
+          <MapDisplay kmlData={kmlData} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
